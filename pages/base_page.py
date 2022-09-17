@@ -54,3 +54,6 @@ class BasePage:
 
     def should_be_basket_link(self):
         assert self.is_element_present(*BasePageLocators.CART_LINK), "Cart button is absent"
+
+    def is_user_authorized(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User is not authorized. (User icon is absent)"
