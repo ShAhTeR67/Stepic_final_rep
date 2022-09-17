@@ -5,7 +5,6 @@ from selenium.webdriver.chrome.options import Options as Chrome_Options
 from selenium.webdriver.firefox.options import Options as FireFox_Options
 
 
-# We could set default param e.g. default='chrome'
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default='chrome',
                      help="Choose browser: chrome or firefox"

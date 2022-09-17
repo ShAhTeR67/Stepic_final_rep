@@ -23,7 +23,8 @@ class ProductPage(BasePage):
         assert book_name == response_book_name, f"Added book name '{response_book_name}' " \
                                                 f"doesn't match original name '{book_name}'"
 
-        assert price == response_cart_value, f"'{response_cart_value}' but item price was '{price}'"
+        assert price == response_cart_value, f"Added item price is '{response_cart_value}'" \
+                                             f" but original price was '{price}'"
 
     def should_add_to_basket(self):
         self.is_element_present(*ProductPageLocators.ADD_TO_CART)
@@ -42,20 +43,17 @@ class ProductPage(BasePage):
         if self.should_be_alert():
             alert = self.browser.switch_to.alert
             ans = alert.text.split(' ')
-            assert 'Поздравляем' in ans[0], 'Answer was wrong'
+            assert "Поздравляем" in ans[0], "Answer was wrong"
             alert.accept()
         else:
             print("No second alert appeared")
-        """
-        Необходимо придумать assert
-        """
 
     def should_not_be_success_message_after_adding_product_to_basket(self):
         self.should_add_to_basket()
-        self.should_not_be_presented()
+        self.should_not_be_success_message()
 
     def is_not_visible_success_message_after_adding_product_to_basket(self):
-        self.should_not_be_presented()
+        self.should_not_be_success_message()
 
     def is_disappeared_success_message_after_adding_product_to_basket(self):
         self.should_add_to_basket()
@@ -70,7 +68,7 @@ class ProductPage(BasePage):
     def should_be_alert(self):
         return self.is_alert_present()
 
-    def should_not_be_presented(self):
+    def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Element is present but should not"
 
     def should_be_disappeared(self):
